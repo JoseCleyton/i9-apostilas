@@ -1,0 +1,33 @@
+<div class="container-fluid login mx-auto">
+    <div *ngIf="status" class="row">
+        <mat-progress-bar *ngIf="status" color='accent' mode="buffer"></mat-progress-bar>
+    </div>
+
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <div class="title">
+                <mat-card-title>Login</mat-card-title>
+                <mat-card-subtitle>Preencha o formulário para entrar no sistema</mat-card-subtitle>
+            </div>
+        </mat-card-header>
+
+
+        <form [formGroup]="formLogin" class="example-form">
+            <mat-form-field color='accent' class="example-full-width">
+                <mat-label>Login</mat-label>
+                <input matInput placeholder="Ex. aluno@example.com" formControlName="login">
+            </mat-form-field>
+            <mat-form-field color='accent' class="example-full-width">
+                <mat-label>Senha</mat-label>
+                <input type="password" matInput placeholder="Ex. 123456" formControlName="password">
+            </mat-form-field>
+        </form>
+        <div class="row">
+            {{ message }}
+        </div>
+        <div class="mx-auto div-button">
+            <button class="button btn" (click)="authenticate()">Login</button>
+        </div>
+    </mat-card>
+</div>

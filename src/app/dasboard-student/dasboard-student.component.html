@@ -1,0 +1,137 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/student">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-1">I9-Apostilas <sup>v1</sup></div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/student">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+        <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#video" aria-controls="video">
+                <i class="fas fa-video"></i>
+                <span>Vídeo Aula</span>
+            </a>
+            <div id="video" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" routerLink="listAllVideosLessonByStudent">Listar</a>
+                </div>
+            </div>
+        </li>
+
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#ebook" aria-controls="ebook">
+                <i class="fas fa-file-pdf"></i>
+                <span>E-book</span>
+            </a>
+            <div id="ebook" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" routerLink="listAllEbooksByStudent">Listar</a>
+                </div>
+            </div>
+        </li>
+
+        <hr class="sidebar-divider d-none d-md-block">
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" data-toggle="collapse" data-target="#accordionSidebar"
+                    class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <div class="text-center d-none d-md-inline">
+                    <button type="button" class="btn rounded-circle" data-toggle="collapse"
+                        data-target="#accordionSidebar" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation" id="sidebarToggleTop">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 "></span>
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" (click)="logout()" href="#" data-toggle="modal"
+                                data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <router-outlet></router-outlet>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; José Cleyton 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>

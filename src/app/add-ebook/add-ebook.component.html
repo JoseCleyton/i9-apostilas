@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Adicionar Ebook</h1>
+                        </div>
+                        <form class="user" [formGroup]="formAddEbook">
+                            <div class="form-group row">
+
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" placeholder="Título"
+                                        formControlName="title">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" placeholder="Link"
+                                        formControlName="link">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-sm-6">
+                                    <select class="form-control" formControlName="clas">
+                                        <option>--- Selecione a Turma --- </option>
+                                        <option class="form-control" *ngFor="let clas of classes"
+                                            value="{{ clas._id }}"> {{ clas.name }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control form-control-user" placeholder="Descrição"
+                                        formControlName="description">
+                                </div>
+                            </div>
+                            <button (click)="addEbook()" [disabled]="!formAddEbook.valid"
+                                data-target=".status" data-toggle="modal" class="btn btn-primary btn-user btn-block">
+                                <h6 style="color: white;">Adicionar</h6>
+                            </button>
+                            <hr>
+                        </form>
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade status" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <mat-progress-bar *ngIf="status" color='accent' mode="buffer"></mat-progress-bar>
+                <h6>{{ message }}</h6>
+                <div class="modal-footer">
+                    <button *ngIf="!status" class="btn btn-secondary" data-dismiss="modal"
+                        (click)="clearForm()">Fechar</button>
+
+                    <button *ngIf="!status" class="btn" style="background-color: #4682b4; color: white;"
+                        data-dismiss="modal">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

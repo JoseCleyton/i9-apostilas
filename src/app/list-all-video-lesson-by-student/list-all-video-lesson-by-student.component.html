@@ -1,0 +1,40 @@
+<div class="back" role="alert">
+    <i class="fas fa-backward" style="margin-right: 10px;"></i> <a href="" routerLink="/student">Voltar</a>
+</div>
+<div class="col-6" style="margin-left: 200px;">
+    <h3>Vídeo Aulas</h3>
+</div>
+
+<mat-progress-bar *ngIf="loadingPage" color='accent' mode="buffer"></mat-progress-bar>
+<h6>{{ message }}</h6>
+
+<div class="card mx-auto" style="margin-top: 20px;">
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Turma</th>
+                    <th scope="col">Professor</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let videoLesson of videosLesson">
+                    <td>{{ videoLesson.title }}</td>
+                    <td>{{ videoLesson.description }}</td>
+                    <td>{{ videoLesson.clas.name }}</td>
+                    <td>{{ videoLesson.clas.teacher }}</td>
+                    <td>{{ videoLesson.date }}</td>
+                    <td><button class="btn" (click)="openLink(videoLesson.link)"><i class="fas fa-link"></i></button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

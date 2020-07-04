@@ -1,0 +1,108 @@
+<div class="back" role="alert">
+    <i class="fas fa-backward" style="margin-right: 10px;"></i> <a href="" routerLink="/admin">Voltar</a>
+</div>
+<div class="col-6" style="margin-left: 200px;">
+    <h3>E-books</h3>
+</div>
+
+<mat-progress-bar *ngIf="loadingPage" color='accent' mode="buffer"></mat-progress-bar>
+<h6>{{ message }}</h6>
+
+<div class="card mx-auto" style="margin-top: 20px;">
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Turma</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ebook of ebooks">
+                    <td>{{ ebook.title }}</td>
+                    <td>{{ ebook.description }}</td>
+                    <td>{{ ebook.clas.name }}</td>
+                    <td>{{ ebook.date }}</td>
+                    <td><button class="btn" (click)="openLink(ebook.link)"><i class="fas fa-link"></i></button></td>
+                    <td>
+                        <button class="btn" (click)="selectebook(ebook._id)" data-target=".modalEdit"
+                            data-toggle="modal">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div *ngIf="ebook !== null && ebook !== undefined" class="modal fade modalEdit" id="exampleModal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Editar Ebook</h1>
+                            </div>
+                            <form class="user" [formGroup]="formEditEbook">
+                                <div class="form-group row">
+
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" placeholder="Título"
+                                            formControlName="title" value="{{ ebook.title }}">
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" placeholder="Link"
+                                            formControlName="link" value="{{ ebook.link }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="email" class="form-control form-control-user"
+                                            placeholder="Descrição" formControlName="description"
+                                            value="{{ ebook.description }}">
+                                    </div>
+                                </div>
+                                <button (click)="updatebook()" data-target=".status" data-toggle="modal"
+                                    class="btn btn-primary btn-user btn-block" data-dismiss="modal">
+                                    <h6 style="color: white;">Editar</h6>
+                                </button>
+                                <hr>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade status" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <mat-progress-bar *ngIf="status" color='accent' mode="buffer"></mat-progress-bar>
+                <h6>{{ message }}</h6>
+                <div class="modal-footer">
+                    <button *ngIf="!status" class="btn btn-secondary" data-dismiss="modal"
+                        (click)="clearForm()">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
