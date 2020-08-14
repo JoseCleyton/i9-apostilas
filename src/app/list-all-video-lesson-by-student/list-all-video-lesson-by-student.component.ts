@@ -9,22 +9,22 @@ import { StudentServiceService } from '../services/student-service.service';
 })
 export class ListAllVideoLessonByStudentComponent implements OnInit {
   public videosLesson: VideoLesson[];
-  public messageLoading: string;
+  public message: string;
   public loadingPage: boolean;
 
   constructor(private studentService: StudentServiceService) { }
 
   ngOnInit() {
-    this.loadingPage = false;
-    this.messageLoading = 'Aguarde. Buscando Dados...'
+    this.loadingPage = true;
+    this.message = 'Aguarde. Buscando Dados...'
     this.studentService.getAllVideosLesson().subscribe(
       (data: any) => {
         this.videosLesson = data.videosLesson;
-        this.messageLoading = '';
+        this.message = '';
         this.loadingPage = false;
       },
       () => {
-        this.messageLoading = 'Erro ao buscar dados !!! '
+        this.message = 'Erro ao buscar dados !!! '
         this.loadingPage = false;
       }
     )

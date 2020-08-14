@@ -33,7 +33,14 @@ export class ListAllUsersComponent implements OnInit {
 
     this.adminService.getUsers().subscribe(
       (users: any) => {
+        let us: User [] = []
         this.users = users.users;
+        this.users.filter((u)=>{
+          if(u.roles === 'student'){
+            us.push(u);
+          }
+          })
+          this.users = us;
         this.loadingMessage = '';
         this.loadingPage = false;
       },

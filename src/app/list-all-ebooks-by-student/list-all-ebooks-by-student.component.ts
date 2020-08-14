@@ -9,22 +9,22 @@ import { VideoLesson } from '../models/videoLesson';
 })
 export class ListAllEbooksByStudentComponent implements OnInit {
   public ebooks: VideoLesson[];
-  public messageLoading: string;
+  public message: string;
   public loadingPage: boolean;
 
   constructor(private studentService: StudentServiceService) { }
 
   ngOnInit() {
-    this.loadingPage = false;
-    this.messageLoading = 'Aguarde. Buscando Dados...'
+    this.loadingPage = true;
+    this.message = 'Aguarde. Buscando Dados...'
     this.studentService.getAllEbooks().subscribe(
       (data: any) => {
         this.ebooks = data.ebooks;
-        this.messageLoading = '';
+        this.message = '';
         this.loadingPage = false;
       },
       () => {
-        this.messageLoading = 'Erro ao buscar dados !!! '
+        this.message = 'Erro ao buscar dados !!! '
         this.loadingPage = false;
       }
     )

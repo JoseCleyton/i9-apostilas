@@ -1,33 +1,44 @@
-<div class="container-fluid login mx-auto">
-    <div *ngIf="status" class="row">
-        <mat-progress-bar *ngIf="status" color='accent' mode="buffer"></mat-progress-bar>
-    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <mat-progress-bar *ngIf="status" color='accent' mode="indeterminate"></mat-progress-bar>
+                        <div class="col-lg-6 d-none d-lg-block bg-login">
+                            <img id="img" src="../../assets/images/i9.png"
+                                style="margin-left: 30%; margin-top: 15%; width: 200px;">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Olá, bem vindo de volta :)</h1>
+                                </div>
+                                <form [formGroup]="formLogin" (ngSubmit)="authenticate()" class="user">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" id="email"
+                                            aria-describedby="emailHelp" placeholder="Login..." formControlName="login">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user" id="senha"
+                                            placeholder="Senha..." formControlName="password">
+                                    </div>
 
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <div class="title">
-                <mat-card-title>Login</mat-card-title>
-                <mat-card-subtitle>Preencha o formulário para entrar no sistema</mat-card-subtitle>
+                                    <div class="form-group">
+                                        <p>{{ message }}</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block"
+                                        [disabled]="!formLogin.valid">
+                                        Login
+                                    </button>
+                                    <hr>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </mat-card-header>
-
-
-        <form [formGroup]="formLogin" class="example-form">
-            <mat-form-field color='accent' class="example-full-width">
-                <mat-label>Login</mat-label>
-                <input matInput placeholder="Ex. aluno@example.com" formControlName="login">
-            </mat-form-field>
-            <mat-form-field color='accent' class="example-full-width">
-                <mat-label>Senha</mat-label>
-                <input type="password" matInput placeholder="Ex. 123456" formControlName="password">
-            </mat-form-field>
-        </form>
-        <div class="row">
-            {{ message }}
         </div>
-        <div class="mx-auto div-button">
-            <button class="button btn" (click)="authenticate()">Login</button>
-        </div>
-    </mat-card>
+    </div>
 </div>

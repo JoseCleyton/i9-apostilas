@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { URLS } from './urls';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +12,16 @@ export class AuthService {
   constructor(private htpp: HttpClient, private router: Router) { }
 
   public authenticate(user: any): Observable<any> {
-    return this.htpp.post('http://localhost:3000/auth/authenticate', {
+    return this.htpp.post(`${URLS.auth}/authenticate`, {
       user: user
     });
   }
   public verifyRoutes() {
     let roles: any = localStorage.getItem('roles');
     if (roles === 'admin') {
-      this.router.navigateByUrl('/admin')
-      console.log('admin')
+      this.router.navigateByUrl('/admin');
     } else {
-      this.router.navigateByUrl('/student')
-      console.log('sust')
+      this.router.navigateByUrl('/student');
     }
   }
 

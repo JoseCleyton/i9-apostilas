@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Ebook } from '../models/ebook';
 import { User } from '../models/user';
 import { Clas } from '../models/clas';
+import { URLS } from '../services/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +22,18 @@ export class AdminService {
     let updatedDate = day + '/' + month + '/' + year;
     videoLesson.date = updatedDate;
 
-    return this.http.post('http://localhost:3000/admin/videoLesson', {
+    return this.http.post(`${URLS.admin}/videoLesson`, {
       videoLesson: videoLesson
     });
   }
   public getVideosLesson(): Observable<VideoLesson[]> {
-    return this.http.get<VideoLesson[]>('http://localhost:3000/admin/videoLesson');
+    return this.http.get<VideoLesson[]>(`${URLS.admin}/videoLesson`);
   }
   public getTotalVideosLesson(): Observable<number> {
-    return this.http.get<number>('http://localhost:3000/admin/videoLesson/totalVideosLesson');
+    return this.http.get<number>(`${URLS.admin}/videoLesson/totalVideosLesson`);
   }
   public updateVideoLesson(videoLesson: VideoLesson): Observable<any> {
-    return this.http.put('http://localhost:3000/admin/videoLesson', {
+    return this.http.put(`${URLS.admin}/videoLesson`, {
       _id: videoLesson._id,
       videoLesson: {
         title: videoLesson.title,
@@ -49,19 +50,19 @@ export class AdminService {
     let year = new Date().getFullYear();
     let updatedDate = day + '/' + month + '/' + year;
     ebook.date = updatedDate;
-    return this.http.post('http://localhost:3000/admin/ebook', {
+    return this.http.post(`${URLS.admin}/ebook`, {
       ebook: ebook
     });
   }
   public getEbooks(): Observable<Ebook[]> {
-    return this.http.get<Ebook[]>('http://localhost:3000/admin/ebook');
+    return this.http.get<Ebook[]>(`${URLS.admin}/ebook`);
   }
   public getTotalEbooks(): Observable<number> {
-    return this.http.get<number>('http://localhost:3000/admin/ebook/totalEbooks');
+    return this.http.get<number>(`${URLS.admin}/ebook/totalEbooks`);
   }
   public updateEbook(ebook: VideoLesson): Observable<any> {
 
-    return this.http.put('http://localhost:3000/admin/ebook', {
+    return this.http.put(`${URLS.admin}/ebook`, {
       _id: ebook._id,
       ebook: {
         title: ebook.title,
@@ -74,18 +75,18 @@ export class AdminService {
 
 
   public addUser(user: User): Observable<any> {
-    return this.http.post('http://localhost:3000/admin/user', {
+    return this.http.post(`${URLS.admin}/user`, {
       user: user
     });
   }
   public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:3000/admin/user');
+    return this.http.get<User[]>(`${URLS.admin}/user`);
   }
   public getTotalUsers(): Observable<number> {
-    return this.http.get<number>('http://localhost:3000/admin/user/totalUsers');
+    return this.http.get<number>(`${URLS.admin}/user/totalUsers`);
   }
   public updateUser(user: any): Observable<any> {
-    return this.http.put('http://localhost:3000/admin/user', {
+    return this.http.put(`${URLS.admin}/user`, {
       _id: user._id,
       user: {
         name: user.name,
@@ -95,20 +96,20 @@ export class AdminService {
   }
 
   public addClass(clas: Clas): Observable<any> {
-    return this.http.post('http://localhost:3000/admin/clas', {
+    return this.http.post(`${URLS.admin}/clas`, {
       name: clas.name,
       schedulle: clas.schedulle,
       teacher: clas.teacher
     });
   }
   public getClasses(): Observable<Clas[]> {
-    return this.http.get<Clas[]>('http://localhost:3000/admin/clas');
+    return this.http.get<Clas[]>(`${URLS.admin}/clas`);
   }
   public getTotalClasses(): Observable<Clas[]> {
-    return this.http.get<Clas[]>('http://localhost:3000/admin/clas/totalClasses');
+    return this.http.get<Clas[]>(`${URLS.admin}/clas/totalClasses`);
   }
   public updateClas(clas: Clas): Observable<any> {
-    return this.http.put('http://localhost:3000/admin/clas', {
+    return this.http.put(`${URLS.admin}/clas`, {
       _id: clas._id,
       clas: {
         name: clas.name,
