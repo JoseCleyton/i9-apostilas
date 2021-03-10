@@ -1,104 +1,200 @@
 <div class="back" role="alert">
-    <i class="fas fa-backward" style="margin-right: 10px;"></i> <a href="" routerLink="/admin">Voltar</a>
+  <i class="fas fa-backward" style="margin-right: 10px"></i>
+  <a href="" routerLink="/admin">Voltar</a>
 </div>
-<div class="col-6" style="margin-left: 200px;">
-    <h3>Usuários</h3>
+<div class="col-6" style="margin-left: 200px">
+  <h3>Usuários</h3>
 </div>
 
-<mat-progress-bar *ngIf="loadingPage" color='accent' mode="buffer"></mat-progress-bar>
+<mat-progress-bar
+  *ngIf="loadingPage"
+  color="accent"
+  mode="buffer"
+></mat-progress-bar>
 <h6>{{ loadingMessage }}</h6>
 
-<div class="card mx-auto" style="margin-top: 20px;">
-
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Turma</th>
-                    <th scope="col">Login</th>
-                    <th scope="col">Editar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of users">
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.clas.name }}</td>
-                    <td>{{ user.login }}</td>
-                    <td>
-                        <button class="btn" (click)="selectUser(user._id)" data-target=".modalEdit" data-toggle="modal">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-
+<div class="card mx-auto" style="margin-top: 20px">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Turma</th>
+          <th scope="col">Login</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Deletar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.clas.name }}</td>
+          <td>{{ user.login }}</td>
+          <td>
+            <button
+              class="btn"
+              (click)="selectUser(user._id)"
+              data-target=".modalEdit"
+              data-toggle="modal"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn"
+              (click)="selectUser(user._id)"
+              data-target=".modalDesativar"
+              data-toggle="modal"
+            >
+              <i class="fas fa-minus-circle"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div *ngIf="user !== null && user !== undefined" class="modal fade modalEdit" id="exampleModal" tabindex="-1"
-    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
+<div
+  *ngIf="user !== null && user !== undefined"
+  class="modal fade modalEdit"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Editar Usuário</h1>
+              </div>
+              <form class="user" [formGroup]="formEditUser">
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input
+                      type="text"
+                      class="form-control form-control-user"
+                      placeholder="Nome"
+                      formControlName="name"
+                    />
+                  </div>
 
-                <div class="row">
-                    <div class="col-lg">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Editar Usuário</h1>
-                            </div>
-                            <form class="user" [formGroup]="formEditUser">
-                                <div class="form-group row">
-
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" placeholder="Nome"
-                                            formControlName="name">
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <select class="form-control" formControlName="clas">
-                                            <option>--- Selecione a Turma --- </option>
-                                            <option class="form-control" *ngFor="let clas of classes"
-                                                value="{{ clas._id }}"> {{ clas.name }}
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                </div>
-
-
-
-                                <button (click)="updateUser()" [disabled]="!formEditUser.valid" data-target=".status"
-                                    data-toggle="modal" class="btn btn-primary btn-user btn-block" data-dismiss="modal">
-                                    <h6 style="color: white;">Editar</h6>
-                                </button>
-                                <hr>
-                            </form>
-                        </div>
-                    </div>
+                  <div class="col-sm-6">
+                    <select class="form-control" formControlName="clas">
+                      <option>--- Selecione a Turma ---</option>
+                      <option
+                        class="form-control"
+                        *ngFor="let clas of classes"
+                        value="{{ clas._id }}"
+                      >
+                        {{ clas.name }}
+                      </option>
+                    </select>
+                  </div>
                 </div>
 
+                <button
+                  (click)="updateUser()"
+                  [disabled]="!formEditUser.valid"
+                  data-target=".status"
+                  data-toggle="modal"
+                  class="btn btn-primary btn-user btn-block"
+                  data-dismiss="modal"
+                >
+                  <h6 style="color: white">Editar</h6>
+                </button>
+                <hr />
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-
-<div class="modal fade status" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <mat-progress-bar *ngIf="status" color='accent' mode="buffer"></mat-progress-bar>
-                <h6>{{ message }}</h6>
-                <div class="modal-footer">
-                    <button *ngIf="!status" class="btn btn-secondary" data-dismiss="modal"
-                        (click)="clearForm()">Fechar</button>
-                </div>
-            </div>
-        </div>
+<div
+  *ngIf="user !== null && user !== undefined"
+  class="modal fade modalDesativar"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Deletar Usuário</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Deseja realmente deletar esse usuário,
+          <strong> {{ user.name }} </strong>?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-target=".status"
+          data-toggle="modal"
+          data-dismiss="modal"
+          (click)="deletarUsuario()"
+        >
+          Deletar
+        </button>
+      </div>
     </div>
+  </div>
+</div>
+
+<div
+  class="modal fade status"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <mat-progress-bar
+          *ngIf="status"
+          color="accent"
+          mode="buffer"
+        ></mat-progress-bar>
+        <h6>{{ message }}</h6>
+        <div class="modal-footer">
+          <button
+            *ngIf="!status"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="clearForm()"
+          >
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

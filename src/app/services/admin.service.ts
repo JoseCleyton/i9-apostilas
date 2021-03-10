@@ -94,6 +94,9 @@ export class AdminService {
       }
     });
   }
+  public deleteUser(_id: string): Observable<any> {
+    return this.http.delete(`${URLS.admin}/user/${_id}`);
+  }
 
   public addClass(clas: Clas): Observable<any> {
     return this.http.post(`${URLS.admin}/clas`, {
